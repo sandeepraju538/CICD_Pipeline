@@ -1,36 +1,16 @@
-// Importing http module
-var http = require('http');
-  
-// Setting up PORT
-const PORT = process.env.PORT || 3000;
-  
-// Creating http Server
-var httpServer = http.createServer(
-        function(request, response){
-  
-  // Setting up Headers  
-  response.setHeader('Content-Type', 'text/html');
-  response.setHeader('Set-Cookie', ['type=ninja', 
-  'language=javascript']);
-  response.setHeader('X-Foo', 'bar');
-  
-  // Calling response.writeHead method
-  response.writeHead(200, 
-     { 'Content-Type': 'text/plain' });
-  
-  // Getting the set Headers
-  const headers = response.getHeaders();
-    
-  // Printing those headers
-  console.log(headers);
-  
-  // Prints Output on the 
-  // browser in response
-  response.end('I am cool!');
+'use strict';
+
+const express = require('express');
+
+// Constants
+const PORT = 8080;
+const HOST = '0.0.0.0';
+
+// App
+const app = express();
+app.get('/', (req, res) => {
+  res.send('Hello world\n');
 });
-  
-// Listening to http Server
-httpServer.listen(PORT, () => {
-   console.log(
-"Server is running at port 3000...");
-});
+
+app.listen(PORT, HOST);
+console.log(`Running on http://${HOST}:${PORT}`);
