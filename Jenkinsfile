@@ -8,6 +8,6 @@ node {
        	//  customImage.push()
     }
 	docker.withRegistry('https://registry.hub.docker.com', 'DockerHub') {
-        app.push("latest")
+        docker.push()
 	}
 }
