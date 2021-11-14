@@ -4,7 +4,10 @@ node {
         checkout scm
     }
     stage('Build image') {
-       app = docker.build("sandeep/dockerwebapp")
+        environment {
+            HOME="."
+        }
+        app = docker.build("sandeep/dockerwebapp")
     }
     stage('Test image') {
         app.inside {
@@ -12,7 +15,7 @@ node {
         }
     }
     stage('Push image') {
-        docker.withRegistry('https://registry.hub.docker.com', 'DockerHub') { 
+        docker.withRegistry('https://registry.hub.docker.com', 'DockerHub') {
             app.push("${env.BUILD_NUMBER}")
             app.push("latest")
         }    
